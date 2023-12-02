@@ -2,7 +2,7 @@ import styles from './Register.module.css'
 
 const Register = () => {
 	return (
-		<div>
+		<div className={styles.register}>
 			<h1>Cadastre-se para postar</h1>
 			<p>Crie seu usuário e compartilhe as suas histórias</p>
 			<form>
