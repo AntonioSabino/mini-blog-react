@@ -1,10 +1,6 @@
-import { app } from '../firebase/config'
+import { auth } from '../firebase/config'
 
-import {
-	getAuth,
-	createUserWithEmailAndPassword,
-	updateProfile,
-} from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { useState, useEffect } from 'react'
 import { User } from '../interfaces/user.interface'
 import { FirebaseError } from 'firebase/app'
@@ -15,8 +11,6 @@ export const useAuthentication = () => {
 	// cleanup
 	// deal with memory leaks
 	const [cancelled, setCancelled] = useState(false)
-
-	const auth = getAuth(app)
 
 	function checkIfCancelled() {
 		if (cancelled) {
