@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import styles from './Header.module.css'
+import { useAuthValue } from '../../hooks/useAuthValue'
 
 const Header = () => {
+	const user = useAuthValue()
+
 	return (
 		<header>
 			<nav className={styles.navbar}>
@@ -20,22 +23,46 @@ const Header = () => {
 							Home
 						</NavLink>
 					</li>
-					<li>
-						<NavLink
-							to='/login'
-							className={({ isActive }) => (isActive ? styles.active : '')}
-						>
-							Login
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							to='/register'
-							className={({ isActive }) => (isActive ? styles.active : '')}
-						>
-							Cadastrar
-						</NavLink>
-					</li>
+					{!user && (
+						<>
+							<li>
+								<NavLink
+									to='/login'
+									className={({ isActive }) => (isActive ? styles.active : '')}
+								>
+									Login
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to='/register'
+									className={({ isActive }) => (isActive ? styles.active : '')}
+								>
+									Cadastrar
+								</NavLink>
+							</li>
+						</>
+					)}
+					{user && (
+						<>
+							<li>
+								<NavLink
+									to='/posts/create'
+									className={({ isActive }) => (isActive ? styles.active : '')}
+								>
+									Criar Post
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to='/dashboard'
+									className={({ isActive }) => (isActive ? styles.active : '')}
+								>
+									Dashboard
+								</NavLink>
+							</li>
+						</>
+					)}
 					<li>
 						<NavLink
 							to='/about'

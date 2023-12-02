@@ -10,6 +10,8 @@ import { AuthProvider } from './context/AuthContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from './hooks/useAuthentication'
+import Dashboard from './pages/Dashboard'
+import CreatePost from './pages/CreatePost'
 
 function App() {
 	const { auth } = useAuthentication()
@@ -53,6 +55,14 @@ function App() {
 						<Route
 							path='register'
 							element={<Register />}
+						/>
+						<Route
+							path='dashboard'
+							element={<Dashboard />}
+						/>
+						<Route
+							path='posts/create'
+							element={<CreatePost />}
 						/>
 						<Route
 							path='*'
