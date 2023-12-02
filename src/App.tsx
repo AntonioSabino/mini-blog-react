@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
 	return (
@@ -18,6 +20,14 @@ function App() {
 					<Route
 						path='about'
 						element={<About />}
+					/>
+					<Route
+						path='login'
+						element={<Login />}
+					/>
+					<Route
+						path='register'
+						element={<Register />}
 					/>
 					<Route
 						path='*'
