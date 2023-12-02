@@ -1,0 +1,31 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+}
+
+input::placeholder,
+textarea::placeholder {
+	font-family: 'Montserrat', sans-serif;
+}
+
+input:focus,
+textarea:focus {
+	outline: none;
+}
+
+a,
+nav button {
+	text-decoration: none;
+	background: transparent;
+	border: none;
+	color: #000;
+	transition: 0.4s;
+	cursor: pointer;
+	font-family: 'Montserrat', sans-serif;
+}
+
+a:hover,
+nav button:hover {
+	color: #bbb;
+}
