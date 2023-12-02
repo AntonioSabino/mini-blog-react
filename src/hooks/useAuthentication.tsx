@@ -1,6 +1,10 @@
 import { auth } from '../firebase/config'
 
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import {
+	createUserWithEmailAndPassword,
+	signOut,
+	updateProfile,
+} from 'firebase/auth'
 import { useState, useEffect } from 'react'
 import { User } from '../interfaces/user.interface'
 import { FirebaseError } from 'firebase/app'
@@ -64,6 +68,12 @@ export const useAuthentication = () => {
 		}
 	}
 
+	const logout = () => {
+		checkIfCancelled()
+
+		signOut(auth)
+	}
+
 	useEffect(() => {
 		return () => {
 			setCancelled(true)
@@ -75,5 +85,6 @@ export const useAuthentication = () => {
 		createUser,
 		error,
 		loading,
+		logout,
 	}
 }

@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import { AuthProvider } from './context/AuthContext'
-import { onAuthStateChanged } from 'firebase/auth'
+import { User, onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from './hooks/useAuthentication'
 import Dashboard from './pages/Dashboard'
@@ -15,7 +15,7 @@ import CreatePost from './pages/CreatePost'
 
 function App() {
 	const { auth } = useAuthentication()
-	const [user, setUser] = useState({})
+	const [user, setUser] = useState<User>({} as User)
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
 			if (user) {
 				setUser(user)
 			} else {
-				setUser({})
+				setUser({} as User)
 			}
 
 			setLoading(false)
@@ -50,19 +50,19 @@ function App() {
 						/>
 						<Route
 							path='login'
-							element={!user ? <Login /> : <Navigate to='/' />}
+							element={!user.uid ? <Login /> : <Navigate to='/' />}
 						/>
 						<Route
 							path='register'
-							element={!user ? <Register /> : <Navigate to='/' />}
+							element={!user.uid ? <Register /> : <Navigate to='/' />}
 						/>
 						<Route
 							path='dashboard'
-							element={user ? <Dashboard /> : <Navigate to='/' />}
+							element={user.uid ? <Dashboard /> : <Navigate to='/' />}
 						/>
 						<Route
 							path='posts/create'
-							element={user ? <CreatePost /> : <Navigate to='/' />}
+							element={user.uid ? <CreatePost /> : <Navigate to='/' />}
 						/>
 						<Route
 							path='*'

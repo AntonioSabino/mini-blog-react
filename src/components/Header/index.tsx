@@ -1,9 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import styles from './Header.module.css'
 import { useAuthValue } from '../../hooks/useAuthValue'
+import { useAuthentication } from '../../hooks/useAuthentication'
 
 const Header = () => {
 	const user = useAuthValue()
+	const { logout } = useAuthentication()
+	console.log(user)
 
 	return (
 		<header>
@@ -23,7 +26,7 @@ const Header = () => {
 							Home
 						</NavLink>
 					</li>
-					{!user && (
+					{!user.uid && (
 						<>
 							<li>
 								<NavLink
@@ -43,7 +46,7 @@ const Header = () => {
 							</li>
 						</>
 					)}
-					{user && (
+					{user.uid && (
 						<>
 							<li>
 								<NavLink
@@ -71,6 +74,11 @@ const Header = () => {
 							Sobre
 						</NavLink>
 					</li>
+					{user.uid && (
+						<li>
+							<button onClick={logout}>Sair</button>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</header>
