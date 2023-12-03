@@ -23,13 +23,13 @@ Bem-vindo ao Mini Blog, um projeto criado com React, TypeScript e Firebase. Este
 1. **Clone o Repositório**:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git@github.com:AntonioSabino/mini-blog-react.git
    ```
 
 2. **Instale as Dependências**:
 
    ```bash
-   cd seu-repositorio
+   cd mini-blog-react
    npm install
    ```
 
