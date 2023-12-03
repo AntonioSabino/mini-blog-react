@@ -1,3 +1,5 @@
+import { useAuthValue } from '../../hooks/useAuthValue'
+import { useInsertDocument } from '../../hooks/useInsertDocument'
 import styles from './CreatePost.module.css'
 import { useState } from 'react'
 
@@ -6,10 +8,26 @@ const CreatePost = () => {
 	const [image, setImage] = useState('')
 	const [content, setContent] = useState('')
 	const [tags, setTags] = useState('')
-	// const [formError, setFormError] = useState('')
+	const [formError, setFormError] = useState('')
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const user = useAuthValue()
+
+	const { insertDocument, response } = useInsertDocument('posts')
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		setFormError('')
+
+		// console.log('user', user)
+
+		await insertDocument({
+			title,
+			image,
+			content,
+			tags: tags.split(',').map((tag) => tag.trim()),
+			uid: user?.uid,
+			createdBy: user?.displayName,
+		})
 	}
 
 	return (
@@ -60,13 +78,7 @@ const CreatePost = () => {
 						onChange={(e) => setTags(e.target.value)}
 					/>
 				</label>
-				<button
-					type='submit'
-					className='btn'
-				>
-					Cadastrar
-				</button>
-				{/* {!loading && (
+				{!response.loading && (
 					<button
 						type='submit'
 						className='btn'
@@ -74,7 +86,7 @@ const CreatePost = () => {
 						Cadastrar
 					</button>
 				)}
-				{loading && (
+				{response.loading && (
 					<button
 						type='submit'
 						className='btn'
@@ -83,7 +95,7 @@ const CreatePost = () => {
 						Aguarde
 					</button>
 				)}
-				{error && <p className='error'>{error}</p>} */}
+				{response.error && <p className='error'>{response.error}</p>}
 			</form>
 		</div>
 	)
