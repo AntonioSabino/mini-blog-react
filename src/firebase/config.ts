@@ -3,12 +3,13 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyBHFQPAGBgBq02ubJmrVV11ugBum9rGgyk',
-	authDomain: 'mini-blog-91e39.firebaseapp.com',
-	projectId: 'mini-blog-91e39',
-	storageBucket: 'mini-blog-91e39.appspot.com',
-	messagingSenderId: '228619554385',
-	appId: '1:228619554385:web:b7c01c6c965d5896583270',
+	apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_REACT_APP_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env
+		.VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
 }
 
 const app = initializeApp(firebaseConfig)
