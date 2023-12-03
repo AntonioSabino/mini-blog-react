@@ -6,7 +6,7 @@ import {
 	updateProfile,
 } from 'firebase/auth'
 import { useState, useEffect } from 'react'
-import { User } from '../interfaces/user.interface'
+import { CreateUser } from '../interfaces/user.interface'
 import { FirebaseError } from 'firebase/app'
 
 export const useAuthentication = () => {
@@ -22,7 +22,7 @@ export const useAuthentication = () => {
 		}
 	}
 
-	const createUser = async (data: User) => {
+	const createUser = async (data: CreateUser) => {
 		checkIfCancelled()
 
 		setLoading(true)
