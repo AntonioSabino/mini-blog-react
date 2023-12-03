@@ -18,16 +18,35 @@ const CreatePost = () => {
 		e.preventDefault()
 		setFormError('')
 
-		// console.log('user', user)
+		try {
+			new URL(image)
+		} catch (error) {
+			setFormError('A imagem deve ser uma URL válida')
+			return
+		}
+
+		const tagsArray = tags.split(',').map((tag) => tag.trim().toLowerCase())
+
+		if (!title || !image || !content || !tags) {
+			setFormError('Preencha todos os campos')
+			return
+		}
+
+		if (formError) return
 
 		await insertDocument({
 			title,
 			image,
 			content,
-			tags: tags.split(',').map((tag) => tag.trim()),
+			tags: tagsArray,
 			uid: user?.uid,
 			createdBy: user?.displayName,
 		})
+
+		setTitle('')
+		setImage('')
+		setContent('')
+		setTags('')
 	}
 
 	return (
@@ -96,6 +115,7 @@ const CreatePost = () => {
 					</button>
 				)}
 				{response.error && <p className='error'>{response.error}</p>}
+				{formError && <p className='error'>{formError}</p>}
 			</form>
 		</div>
 	)
