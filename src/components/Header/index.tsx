@@ -6,7 +6,6 @@ import { useAuthentication } from '../../hooks/useAuthentication'
 const Header = () => {
 	const user = useAuthValue()
 	const { logout } = useAuthentication()
-	console.log(user)
 
 	return (
 		<header>

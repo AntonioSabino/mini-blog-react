@@ -7,12 +7,19 @@ const Login = () => {
 	const [password, setPassword] = useState('')
 	const [error, setError] = useState('')
 
-	const { error: authError, loading } = useAuthentication()
+	const { login, error: authError, loading } = useAuthentication()
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		setError('')
+
+		const user = {
+			email,
+			password,
+		}
+
+		await login(user)
 	}
 
 	useEffect(() => {

@@ -2,11 +2,12 @@ import { auth } from '../firebase/config'
 
 import {
 	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
 	signOut,
 	updateProfile,
 } from 'firebase/auth'
 import { useState, useEffect } from 'react'
-import { CreateUser } from '../interfaces/user.interface'
+import { CreateUser, LoginUser } from '../interfaces/user.interface'
 import { FirebaseError } from 'firebase/app'
 
 export const useAuthentication = () => {
@@ -68,6 +69,44 @@ export const useAuthentication = () => {
 		}
 	}
 
+	const login = async (data: LoginUser) => {
+		checkIfCancelled()
+
+		setLoading(true)
+		setError('')
+
+		try {
+			await signInWithEmailAndPassword(auth, data.email, data.password)
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				console.log(error.message)
+				console.log(typeof error.message)
+
+				let systemErrorMessage
+
+				switch (error.code) {
+					case 'auth/invalid-email':
+					case 'auth/wrong-password':
+					case 'auth/invalid-credential':
+						systemErrorMessage = 'Email e/ou senha inválidos'
+						break
+					case 'auth/user-disabled':
+						systemErrorMessage = 'Usuário desabilitado'
+						break
+					case 'auth/user-not-found':
+						systemErrorMessage = 'Usuário não encontrado'
+						break
+					default:
+						systemErrorMessage = 'Erro desconhecido'
+				}
+
+				setError(systemErrorMessage)
+			}
+		} finally {
+			setLoading(false)
+		}
+	}
+
 	const logout = () => {
 		checkIfCancelled()
 
@@ -86,5 +125,6 @@ export const useAuthentication = () => {
 		error,
 		loading,
 		logout,
+		login,
 	}
 }
