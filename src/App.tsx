@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import { useAuthentication } from './hooks/useAuthentication'
 import Dashboard from './pages/Dashboard'
 import CreatePost from './pages/CreatePost'
+import Search from './pages/Search'
 
 function App() {
 	const { auth } = useAuthentication()
@@ -47,6 +48,10 @@ function App() {
 						<Route
 							path='about'
 							element={<About />}
+						/>
+						<Route
+							path='search'
+							element={<Search />}
 						/>
 						<Route
 							path='login'
