@@ -1,0 +1,32 @@
+.post_detail {
+	max-width: 600px;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.post_detail img {
+	max-width: 100%;
+}
+
+.post_detail .tags {
+	display: flex;
+}
+
+.post_detail .tags p {
+	margin-right: 0.5em;
+}
+
+.post_detail .tags p:last-child {
+	margin-right: 0;
+}
+
+.post_detail .tags span {
+	font-weight: bold;
+}
+
+.created_by {
+	font-style: italic;
+	color: #444;
+	font-size: 0.8em;
+}

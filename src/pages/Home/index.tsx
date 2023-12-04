@@ -2,10 +2,12 @@ import styles from './Home.module.css'
 import { Link } from 'react-router-dom'
 
 import { useState } from 'react'
+import { useFetchDocuments } from '../../hooks/useFetchDocuments'
+import PostDetail from '../../components/PostDetail'
 
 const Home = () => {
 	const [query, setQuery] = useState('')
-	const [posts, setPosts] = useState([])
+	const { documents: posts, loading } = useFetchDocuments('posts')
 
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -32,6 +34,18 @@ const Home = () => {
 			</form>
 			<div className={styles.posts}>
 				<h1>Posts...</h1>
+				{loading && <p>Carregando...</p>}
+				{posts &&
+					posts.map((post) => (
+						<PostDetail
+							key={post.id}
+							id={post.id}
+							title={post.title}
+							image={post.image}
+							createdBy={post.createdBy}
+							tags={post.tags}
+						/>
+					))}
 				{posts.length === 0 && (
 					<div className={styles.noposts}>
 						<p>Não foram encontrados posts</p>
