@@ -38,6 +38,12 @@ export const useFetchDocuments = (
 						where('tags', 'array-contains', searchQuery),
 						orderBy('createdAt', 'desc')
 					)
+				} else if (uid) {
+					q = query(
+						collectionRef,
+						where('uid', '==', uid),
+						orderBy('createdAt', 'desc')
+					)
 				} else {
 					q = query(collectionRef, orderBy('createdAt', 'desc'))
 				}
