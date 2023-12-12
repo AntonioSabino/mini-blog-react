@@ -13,6 +13,7 @@ import { useAuthentication } from './hooks/useAuthentication'
 import Dashboard from './pages/Dashboard'
 import CreatePost from './pages/CreatePost'
 import Search from './pages/Search'
+import Post from './pages/Post'
 
 function App() {
 	const { auth } = useAuthentication()
@@ -52,6 +53,10 @@ function App() {
 						<Route
 							path='search'
 							element={<Search />}
+						/>
+						<Route
+							path='posts/:id'
+							element={<Post />}
 						/>
 						<Route
 							path='login'
