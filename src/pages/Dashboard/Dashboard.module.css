@@ -1,0 +1,58 @@
+.dashboard {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+}
+
+.dashboard h2 {
+	font-size: 2.2em;
+}
+
+.dashboard p {
+	color: #aaa;
+}
+
+.noposts {
+	text-align: center;
+}
+
+.noposts p {
+	margin: 1.5em;
+}
+
+.noposts a {
+	padding: 10px 25px;
+}
+
+.dashboard table {
+	width: 80%;
+}
+
+.dashboard thead tr {
+	display: flex;
+	justify-content: space-between;
+	font-weight: bold;
+	border-bottom: 2px solid #ccc;
+	padding: 10px;
+}
+
+.dashboard thead tr th {
+	flex: 1;
+}
+
+.dashboard tbody tr {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #ccc;
+}
+
+.dashboard tbody tr td {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+	padding: 10px;
+}

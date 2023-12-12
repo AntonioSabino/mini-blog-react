@@ -23,7 +23,7 @@ const Dashboard = () => {
 	}
 
 	return (
-		<div>
+		<div className={styles.dashboard}>
 			<h2>Dashboard</h2>
 			<p>Gerencie os seus posts</p>
 			{posts && posts.length === 0 ? (

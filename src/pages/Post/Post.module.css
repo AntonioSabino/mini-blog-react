@@ -26,3 +26,15 @@
 .post_container .tags span {
 	font-weight: bold;
 }
+
+.noposts {
+	text-align: center;
+}
+
+.noposts p {
+	margin: 1.5em;
+}
+
+.noposts a {
+	padding: 10px 25px;
+}
