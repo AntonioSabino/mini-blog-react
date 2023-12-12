@@ -9,12 +9,27 @@ const Post = () => {
 	const { document: post } = useFetchDocument('posts', id!)
 
 	return (
-		<div>
+		<div className={styles.post_container}>
 			{post && (
-				<div className={styles.post}>
+				<>
 					<h1>{post.title}</h1>
+					<img
+						src={post.image}
+						alt={post.title}
+					/>
 					<p>{post.content}</p>
-				</div>
+					<h3>Este post trata sobre:</h3>
+					{post.tags && (
+						<div className={styles.tags}>
+							{post.tags.map((tag: string) => (
+								<p key={tag}>
+									<span>#</span>
+									{tag}
+								</p>
+							))}
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	)
