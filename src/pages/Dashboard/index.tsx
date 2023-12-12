@@ -8,13 +8,25 @@ const Dashboard = () => {
 	const user = useAuthValue()
 	const uid = user.uid
 
-	const { documents: posts } = useFetchDocuments('posts', undefined, uid)
+	const { documents: posts, loading } = useFetchDocuments(
+		'posts',
+		undefined,
+		uid
+	)
+
+	const deleteDocument = (id: string) => {
+		console.log(id)
+	}
+
+	if (loading) {
+		return <p>Carregando...</p>
+	}
 
 	return (
 		<div>
 			<h2>Dashboard</h2>
 			<p>Gerencie os seus posts</p>
-			{posts && posts.length === 0 && (
+			{posts && posts.length === 0 ? (
 				<div className={styles.noposts}>
 					<p>Não foram encontrados posts</p>
 					<Link
@@ -24,23 +36,45 @@ const Dashboard = () => {
 						Criar primeiro post
 					</Link>
 				</div>
+			) : (
+				<>
+					<table>
+						<thead>
+							<tr>
+								<th>Título</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							{posts.map((post) => (
+								<tr key={post.id}>
+									<td>{post.title}</td>
+									<td>
+										<Link
+											to={`/posts/${post.id}`}
+											className='btn btn-outline'
+										>
+											Ver
+										</Link>
+										<Link
+											to={`/posts/edit/${post.id}`}
+											className='btn btn-outline'
+										>
+											Editar
+										</Link>
+										<button
+											onClick={() => deleteDocument(post.id)}
+											className='btn btn-outline btn-danger'
+										>
+											Excluir
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</>
 			)}
-
-			{posts &&
-				posts.map((post) => (
-					<div
-						key={post.id}
-						className={styles.post}
-					>
-						<h3>{post.title}</h3>
-						<Link
-							to={`/posts/${post.id}`}
-							className='btn btn-dark'
-						>
-							Ver detalhes
-						</Link>
-					</div>
-				))}
 		</div>
 	)
 }
